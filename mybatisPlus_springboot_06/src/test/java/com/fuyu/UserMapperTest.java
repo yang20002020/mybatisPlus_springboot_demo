@@ -263,6 +263,63 @@ public class UserMapperTest {
         }
     }
 
+    @Test
+    public void testWrapper() {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+      //SELECT id,user_name,password,name,age,email FROM tb_user WHERE name LIKE ?
+        // Parameters: %曹%(String)
+        wrapper.like("name", "曹");
+        List<User> users = this.userMapper.selectList(wrapper);
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
+    public void testWrapper_1() {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        //SELECT id,user_name,password,name,age,email FROM tb_user ORDER BY age DESC
+        wrapper.orderByDesc("age");
+        List<User> users = this.userMapper.selectList(wrapper);
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
+    public void testWrapper_or() {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        //SELECT id,user_name,password,name,age,email FROM tb_user WHERE name = ? OR age = ?
+        wrapper.eq("name","李四").or().eq("age", 24);
+        List<User> users = this.userMapper.selectList(wrapper);
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
+    @Test
+    public void testWrapper_and() {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        //SELECT id,user_name,password,name,age,email FROM tb_user WHERE name = ? and age = ?
+        wrapper.eq("name","李四").eq("age", 24);
+        List<User> users = this.userMapper.selectList(wrapper);
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
+    public void testWrapper_select() {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        //SELECT id,name,age FROM tb_user WHERE name = ? OR age = ?
+        wrapper.eq("name", "李四")
+                .or()
+                .eq("age", 24)
+                .select("id", "name", "age");
+        List<User> users = this.userMapper.selectList(wrapper);
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
 
 }
 

@@ -4,6 +4,7 @@ import com.fuyu.mp.pojo.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -59,6 +60,17 @@ public class UserMapperTest_2 {
         for (User user1 : users) {
             System.out.println(user1);
         }
+    }
+
+    /**
+     * 测试全表更新，sql分析器阻断效果
+     */
+    @Test
+    public void testUpdateAll(){
+        User user = new User();
+        user.setAge(20);
+        boolean result = user.update(null);//全表更新
+        System.out.println("result = " + result);
     }
 }
 

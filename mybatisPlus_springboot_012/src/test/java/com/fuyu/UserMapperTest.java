@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fuyu.mp.enums.SexEnum;
 import com.fuyu.mp.mapper.UserMapper;
 import com.fuyu.mp.pojo.User;
 import org.junit.Test;
@@ -352,6 +353,35 @@ public class UserMapperTest {
         this.userMapper.selectById(2L);
     }
 
+    /**
+     * 枚举
+     */
+
+    @Test
+    public void testInsert_2(){
+        User user = new User();
+        user.setName("貂蝉");
+        user.setUserName("diaochan");
+        user.setAge(20);
+        user.setMail("diaochan@itast.cn");
+        user.setVersion(1);
+        user.setSex(SexEnum.WOMAN);
+        int result = this.userMapper.insert(user);
+        System.out.println("result = " + result);
+    }
+
+    /**
+     *  枚举查询
+     */
+    @Test
+    public void testSelectBySex() {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("sex", SexEnum.WOMAN);
+        List<User> users = this.userMapper.selectList(wrapper);
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
 }
 
 

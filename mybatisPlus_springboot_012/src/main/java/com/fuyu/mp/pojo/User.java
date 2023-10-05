@@ -1,6 +1,7 @@
 package com.fuyu.mp.pojo;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.fuyu.mp.enums.SexEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,4 +29,5 @@ public class User extends Model<User> {
 
     @TableLogic // 逻辑删除字段 1  删除  0 未被删除
     private Integer deleted;
+    private SexEnum sex;
 }
